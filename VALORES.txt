@@ -1,0 +1,22 @@
+- Moda Convencional
+-- Classe
+-- Frequencia
+-- Ponto Medio
+
+- Moda King
+-- Classe
+-- Frequencia
+-- Ponto Medio
+
+- Moda Czuber
+-- Classe
+-- Frequencia
+-- Ponto Medio
+
+- Moda Pearson
+-- Calculo
+
+- Media
+- Mediana
+- Variancia
+- Desvio Padrão

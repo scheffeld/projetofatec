@@ -1,0 +1,22 @@
+{
+  "name": "projetofatec",
+  "version": "1.0.0",
+  "description": "Projeto para FATEC, para aula da Malu.",
+  "main": "app.js",
+  "scripts": {
+    "server": "nodemon app.js"
+  },
+  "author": "Roger S., Gabriel P., Vitor R.",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "chart.js": "^2.7.2",
+    "consign": "^0.1.6",
+    "ejs": "^2.6.1",
+    "events": "^2.0.0",
+    "express": "^4.16.3",
+    "highcharts": "^6.1.0",
+    "mysql": "^2.15.0",
+    "nodemon": "^1.17.5"
+  }
+}
