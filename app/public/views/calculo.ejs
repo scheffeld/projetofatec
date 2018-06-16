@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+    <!-- CSS e JavaScript do Bootstrap V4 Alpha -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">    
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css" type="text/css">
+
+    <title>Programa Estatistico</title>
+
+</head>
+<body class="container text-center">
+    <!-- Navbar -->
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-faded rounded-bottom" style="background-color: rgb(148, 22, 17);">
+        <a class="navbar-brand medium" href="#">EA</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link medium" href="/home">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link medium" href="/calculo">Cálculos Estatisticos <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link medium" href="/correlacao">Correlação e Regressão</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link medium" href="/about">Sobre</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Título da pagina -->
+    <h1 class="display-3 m-5 light">Cálculos Estatísticos</h1>
+
+    <!-- Grupo de botões com as funções -->
+    <div class="btn-group" data-toggle="button">
+        <button id="quantitativaButton" class="btn btn-primary light" style="background-color: rgb(148, 22, 17); border-color: rgb(148, 22, 17);">Iníciar</button>
+        <button id="normalButton" class="btn btn-primary light" style="background-color: rgb(148, 22, 17); border-color: rgb(148, 22, 17);">Distribuição Normal</button>
+        <button id="binomialButton" class="btn btn-primary light" style="background-color: rgb(148, 22, 17); border-color: rgb(148, 22, 17);">Distribuição Binomial</button>
+        <button id="uniformeButton" class="btn btn-primary light" style="background-color: rgb(148, 22, 17); border-color: rgb(148, 22, 17);">Distribuição Uniforme</button>
+    </div>
+    <!-- Fim do grupo de botões -->
+
+    <!-- Jumbotron com os resultados dos cálculos do 1º botão -->
+    <div class="card my-card" style="margin: 10px; padding-top: 13px; padding-bottom: 13px;" id="titulo">
+        <div class="col-12">
+            <ul class="nav nav-tabs">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" id="modaDrop" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Moda</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" id="convencional">Moda Convencional</a>
+                        <a class="dropdown-item" id="king">Moda King</a>
+                        <a class="dropdown-item" id="pearson">Moda Pearson</a>
+                        <a class="dropdown-item" id="czuber">Moda Czuber</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="valoresDrop" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Media e Desvio</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" id="mediana">Media, Mediana e Variancia</a>
+                        <a class="dropdown-item" id="padrao">Desvio Padrão</a>
+                    </div>
+                </li>
+            </ul>
+            <div class="card" id="modaConvencional" style="border-top: none; border-top-left-radius: 0px; border-top-right-radius: 0px; padding-top: 5px;">
+                <a class="light">Convencional</a>
+                <br>
+                <div class="form-group form-inline">
+                    <label class="medium col-2">Classe: </label>
+                    <a class="light col-2" id="convencionalClasse"></a>
+                    <label class="medium col-2">Frequencia: </label>
+                    <a class="light col-2" id="convencionalFrequencia"></a>
+                    <label class="medium col-2">Ponto Médio: </label>
+                    <a class="light col-2" id="convencionalPonto"></a>
+                </div>
+            </div>
+            <div class="card" id="modaKing" style="border-top: none; border-top-left-radius: 0px; border-top-right-radius: 0px; padding-top: 5px;">
+                <a class="light">King</a>
+                <br>
+                <div class="form-group form-inline">
+                    <label class="medium col-2">Classe: </label>
+                    <a class="light col-2" id="kingClasse"></a>
+                    <label class="medium col-2">Frequencia: </label>
+                    <a class="light col-2" id="kingFrequencia"></a>
+                    <label class="medium col-2">Ponto Médio: </label>
+                    <a class="light col-2" id="kingPonto"></a>
+                </div>
+            </div>
+            <div class="card" id="modaPearson" style="border-top: none; border-top-left-radius: 0px; border-top-right-radius: 0px; padding-top: 5px;">
+                <a class="light">Pearson</a>
+                <br>
+                <div class="form-group form-inline">
+                    <label class="medium col-2">Classe: </label>
+                    <a class="light col-2" id="pearsonClasse"></a>
+                    <label class="medium col-2">Frequencia: </label>
+                    <a class="light col-2" id="pearsonFrequencia"></a>
+                    <label class="medium col-2">Ponto Médio: </label>
+                    <a class="light col-2" id="pearsonPonto"></a>
+                </div>
+            </div>
+            <div class="card" id="modaCzuber" style="border-top: none; border-top-left-radius: 0px; border-top-right-radius: 0px; padding-top: 5px;">
+                <a class="light">Czuber</a>
+                <br>
+                <div class="form-group form-inline">
+                    <label class="medium col-2">Classe: </label>
+                    <a class="light col-2" id="czuberClasse"></a>
+                    <label class="medium col-2">Frequencia: </label>
+                    <a class="light col-2" id="czuberFrequencia"></a>
+                    <label class="medium col-2">Ponto Médio: </label>
+                    <a class="light col-2" id="czuberPonto"></a>
+                </div>
+            </div>
+            <div class="card" id="media" style="border-top: none; border-top-left-radius: 0px; border-top-right-radius: 0px; padding-top: 5px;">
+                <br>
+                <div class="form-group form-inline">
+                    <label class="medium col-2">Media: </label>
+                    <a class="light col-2" id="mediaResult"></a>
+                    <label class="medium col-2">Mediana: </label>
+                    <a class="light col-2" id="medianaResult"></a>
+                    <label class="medium col-2">Variancia: </label>
+                    <a class="light col-2" id="varianciaResult"></a>
+                </div>
+            </div>
+            <div class="card" id="desvio" style="border-top: none; border-top-left-radius: 0px; border-top-right-radius: 0px; padding-top: 5px;">
+                <br>
+                <div class="form-group form-inline">
+                    <label class="medium col-3">Desvio Padrão: </label>
+                    <a class="light col-3" id="desvioResult"></a>
+                    <label class="medium col-3">Porcetagem: </label>
+                    <a class="light col-3" id="desvioPorcResult">%</a>
+                </div>
+            </div>
+            <div class="col-12" id="tabela">
+            </div>
+            <div class="col-12" id="container">
+            </div>
+        </div>
+    </div>
+    <!-- fim do jumbotron dos cálculos -->
+
+    <!-- Modal #inicioModal com os cálculos. -->
+    <div class="modal fade" id="varQuant" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title medium" id="exampleModalLabel">Cálculos Estatísticos</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group form-inline" id="calculos">
+
+                    </div>
+                    <div class="form-group form-inline">
+                        <div class="col-2"></div>
+                        <label class="col-4 medium">Tipo de Dado:</label>
+                        <select id="tipoDados" class="form-control form-control-sm col-4 light">
+                            <option value="1">Discreta</option>
+                            <option value="2">Continua</option>
+                        </select>
+                        <div class="col-2"></div>
+                    </div>
+                    <div class="form-group form-inline">
+                        <div class="col-2"></div>
+                        <label class="col-4 medium">Tipo de Coleta:</label>
+                        <select id="tipoColeta" class="form-control form-control-sm col-4 light">
+                            <option value="1">Amostra</option>
+                            <option value="2" disabled>População</option>
+                        </select>
+                        <div class="col-2"></div>
+                    </div>
+                    <div class="form-group form-inline" id="elementos">
+                        <div class="col-2"></div>
+                        <label class="col-4 medium">Elementos</label>
+                        <input type="number" placeholder="1,2,3..." min="1" class="form-control form-control-sm col-4 light" id="numeroElementos"/>
+                        <div class="col-2"></div>
+                    </div>
+                    <div class="form-group form-inline">
+                        <div class="col-2"></div>
+                        <label class="form-check-label col-8">
+                            <input class="form-check-input" type="checkbox" id="dadosCopiados"> Usar dados copiados
+                        </label>
+                        <div class="col-2"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary medium" data-dismiss="modal">Fechar</button>
+                    <button id="gerQuant" type="button" class="btn btn-primary medium" style="background-color: rgb(148, 22, 17); border-color: rgb(148, 22, 17);">Gerar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fim modal #inicioModal -->
+
+
+    <!-- Modal #disNormal -->
+    <div class="modal fade bd-example-modal-sm" id="disNormal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title medium" id="exampleModalLabel">Distribuição Normal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group form-inline col-12">
+                            <label class="col-3 medium">Média: </label>
+                            <input id="mediaNormal" class="light form-control form-control-sm input-sm col-3" type="number" min="0" placeholder="0"/>
+                            <label class="col-3 medium">Desvio: </label>
+                            <input id="desvioNormal" class="light form-control form-control-sm input-sm col-3" type="number" min="0" placeholder="0"/>
+                        </div>
+                        <div class="form-group form-inline">
+                            <label class="col-6 medium">Comparação: </label>
+                            <select id="comparacao" class="light form-control form-control-sm col-5">
+                                <option selected disabled>Escolha...</option>
+                                <option value="1">Maior</option>
+                                <option value="2">Menor</option>
+                                <option value="3">Entre</option>
+                            </select>
+                        </div>
+                        <div id="tipoComp" class="form-group form-inline">
+                        </div>
+                        <div id="compResult" class="jumbotron">
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button id="gerarNormal" type="button" class="btn btn-primary" style="background-color: rgb(148, 22, 17); border-color: rgb(148, 22, 17);">Gerar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fim do #disNormal -->
+
+
+        <!-- Inicio #disBinomial -->
+        <div class="modal fade" id="disBinomial" tabindex="-1" role="document" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Distribuição Binomial</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group form-inline col-12">
+                            <label class="col-2 medium">N:</label>
+                            <input id="valorN" class="light form-control form-control-sm input-sm col-2" type="number" min="1" placeholder="0"/>
+                            <label class="col-2 medium">Q:</label>
+                            <input id="valorQ" class="light form-control form-control-sm input-sm col-2" type="number" min="0" max="1" step="0.1" placeholder="0"/>
+                            <label class="col-2 medium">P:</label>
+                            <input id="valorP" class="light form-control form-control-sm input-sm col-2" type="number" min="0" max="1" step="0.1" placeholder="0"/>
+                        </div>
+                        <div class="form-group form-inline col-12">
+                            <label class="col-2 medium">K:</label>
+                            <select id="compBinomial" class="light form-control form-control-sm input-sm col-10">
+                                <option selected disabled>Escolha...</option>
+                                <option value="1">Exatamente</option>
+                                <option value="2">Menor</option>
+                                <option value="3">Maior</option>
+                                <option value="4">Entre:</option>
+                            </select>
+                        </div>
+                        <div id="elementosK" class="form-group form-inline col-12">
+                        </div>
+                        <div id="resultadoBinomial" class="medium jumbotron">
+                            
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button id="gerarBinomial" type="button" class="btn btn-primary" style="background-color: rgb(148, 22, 17); border-color: rgb(148, 22, 17);">Gerar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fim do #disBinomial  -->
+
+        <!-- Inicio #disUniforme -->
+        <div class="modal fade bd-example-modal-lg" id="disUniforme" tabindex="-1" role="document" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Distribuição Uniforme</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group form-inline col-12">
+                            <label class="col-6 medium">Calcular: </label>
+                            <select class="form-control form-control-sm input-sm col-6 light" id="calcUniforme">
+                                <option selected disabled>Probabilidades</option>
+                                <option value="1">Maior</option>
+                                <option value="2">Menor</option>
+                                <option value="3">Entre</option>
+                            </select>
+                        </div>
+                        <div class="form-group form-inline col-12" id="divUniforme">
+
+                        </div>
+                        <div class="jumbotron col-12" style="height: 223px; width: 100%;" id="jumbotronUniforme">
+                            
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <button type="button" class="btn btn-primary" style="background-color: rgb(148, 22, 17); border-color: rgb(148, 22, 17);" id="gerarUniforme">Gerar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </body>
+
+    <script src="../javascript/calculo.js" type="text/javascript"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+</html>

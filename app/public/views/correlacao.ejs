@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+    <!-- CSS e JavaScript do Bootstrap V4 Alpha -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">    
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css" type="text/css">
+
+    <title>Programa Estatistico</title>
+
+</head>
+<body class="container text-center">
+    <!-- Navbar -->
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-faded rounded-bottom" style="background-color: rgb(148, 22, 17);">
+        <a class="navbar-brand medium" href="#">EA</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link medium" href="/home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link medium" href="/calculo">Cálculos Estatisticos</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link medium" href="/correlacao">Correlação e Regressão <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link medium" href="/about">Sobre</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Título da pagina -->
+    <h1 class="display-3 m-5 light">Correlação e Regressão</h1>
+
+    <div class="form-group form-inline col-12">
+        <label class="medium col-2">X:</label>
+        <input class="light form-control form-control-sm input-sm col-1" placeholder="0" min="0" id="valorX">
+        <label class="medium col-2">X:</label>
+        <input class="light form-control form-control-sm input-sm col-1" placeholder="0" min="0" id="valorY">
+        <div class="col-1"></div>
+        <button class="btn btn-success btn-sm col-2" style="background-color: rgb(148, 22, 17); border-color: rgb(148, 22, 17);" id="gerarTabela">Gravar Dados</button>
+        <div class="col-1"></div>
+        <button class="btn btn-success btn-sm col-2" style="background-color: rgb(148, 22, 17); border-color: rgb(148, 22, 17);" id="calcGerar">Resultado</button>
+        <div class="col-1"></div>
+        <br>
+        <div class="alert alert-success fade show alert-dimissible col-12" id="mensagemDados" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            <strong>Sucesso!</strong> Os valores de X e Y foram inseridos com sucesso.
+        </div>
+        <div class="alert alert-success fade show alert-dimissible col-12" id="mensagemTabela" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            <strong>Sucesso!</strong> Os calculos foram feitos e o grafico gerado.
+        </div>
+    </div>
+
+    <!-- Jumbotron com os resultados dos cálculos do 1º botão -->
+    <div class="card my-card" style="margin: 10px; padding-top: 13px; padding-bottom: 13px;">
+        <div class="form-group form-inline col-12">
+            <div class="form-group form-inline col-12">
+                <label class="medium col-2">Resultado: </label>
+                <a class="light col-1" id="resultado"></a>
+                <label class="medium col-2">Correlação: </label>
+                <a class="light col-3" id="correlacao"></a>
+                <label class="medium col-1">Função: </label>
+                <a class="light col-3" id="funcao"></a>
+            </div>
+            <table class="col-12 table text-center table-sm table-condensed table-striped" style="padding-top: 5px; margin-top: 13px;">
+                <thead class="text-center" style="background-color: rgb(74, 85, 92); text-align: center; color: white;">
+                    <tr>
+                        <th class="text-center">Valor X</th>
+                        <th class="text-center">Valor Y</th>
+                        <th class="text-center">Valor (X*Y)</th>
+                        <th class="text-center">Valor X²</th>
+                        <th class="text-center">Valor Y²</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+
+                </tbody>
+            </table>
+            
+            <div class="col-12" id="container">
+    
+            </div>
+        </div>
+    </div>
+    <!-- fim do jumbotron dos cálculos -->
+
+
+    </body>
+
+    <script src="../javascript/correlacao.js" type="text/javascript"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+</html>
