@@ -585,6 +585,8 @@ function calculoContinua(){
     var mediaContinua = $("#mediaResult")
     var modaCzuber = new Array();
     var modaKing = new Array();
+    var modaPearson = new Array();
+    var mediana = 0;
 
     // If que verifica se o usuário optou por inserir todos os dados manualmente ou colou de um banco
     if(dadosCopiados == false){
@@ -698,6 +700,22 @@ function calculoContinua(){
     };
 
     var maior = Math.max.apply(Math, qtdIntervalos);
+
+    var elementosAux_ = 0
+    var qtdAux_ = 0
+
+    for (i = 0; i < qtd.length; i++){
+        elementosAux_ = elementosAux[i]*qtdAux[i];
+        qtdAux_ = qtdAux_ + qtdAux[i];
+    }
+
+    for (i = 0; i < elementosAux.length; i++){
+        elementosAux_ += elementosAux[i]*qtdAux[i]
+    }
+
+    mediana = math.median(elementos)
+
+    media = (elementosAux_ / qtd);
     
     for (i = 0; i < qtdIntervalos.length; i++){
         if (qtdIntervalos[i] == maior){
@@ -710,32 +728,12 @@ function calculoContinua(){
             modaKing.push(i+1);
             modaKing.push(qtdIntervalos[i]);
             modaKing.push((menorIntervalo[i])+((qtdIntervalos[i + 1])/(qtdIntervalos[i+1] + qtdIntervalos[i-1]))*intervaloClasse)
+            modaPearson.push(i+1);
+            modaPearson.push(qtdIntervalos[i]);
+            modaPearson.push((3*mediana)-(2*media));
         }
     }
 
-    var elementosAux_ = 0
-    var qtdAux_ = 0
-
-    for (i = 0; i < qtd.length; i++){
-        elementosAux_ = elementosAux[i]*qtdAux[i];
-        qtdAux_ = qtdAux_ + qtdAux[i];
-    }
-
-    if (elementos.length%2 == 0){
-        var d = parseInt(qtd/2);
-        mediana = (elementos[d] + elementos[d-1])/2;
-    } else if (qtd%2 == 1){
-        var d = elementos.length - 1
-        var e = d/2;
-        mediana = elementos[e];
-    };
-
-    for (i = 0; i < elementosAux.length; i++){
-        elementosAux_ += elementosAux[i]*qtdAux[i]
-    }
-
-
-    media = (elementosAux_ / qtd);
     mediaContinua.append(media)
     medianaContinua.append(mediana);
     $("#convencionalClasse").append(moda[0])
@@ -746,7 +744,10 @@ function calculoContinua(){
     $("#czuberPonto").append(modaCzuber[2])
     $("#kingClasse").append(modaKing[0])
     $("#kingFrequencia").append(modaKing[1])
-    $("#kingPonto").append(modaKing[2])
+    $("#kingPonto").append(modaKing[2]);
+    $("#pearsonClasse").append(modaPearson[0]);
+    $("#pearsonFrequencia").append(modaPearson[1]);
+    $("#pearsonPonto").append(parseFloat(modaPearson[2]).toFixed(2));
     
         
     // Recuperando a div que vai estar a tabela
