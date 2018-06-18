@@ -198,16 +198,3 @@ $("#calcGerar").click(function(){
         tabelaVazia.show();
     }
 })
-
-$("#closeDados").click(function(){
-    mensagemDados.hide();
-})
-$("#closeTabela").click(function(){
-    mensagemTabela.hide();
-})
-$("#closeVazio").click(function(){
-    campoVazio.hide();
-})
-$("#closeVazia").click(function(){
-    tabelaVazia.hide();
-})
