@@ -9,9 +9,13 @@ var valores = {
 
 var mensagemDados = $("#mensagemDados");
 var mensagemTabela = $("#mensagemTabela");
+var campoVazio = $("#campoVazio");
+var tabelaVazia = $("#tabelaVazia");
 
-mensagemTabela.hide()
-mensagemDados.hide()
+mensagemTabela.hide();
+mensagemDados.hide();
+campoVazio.hide();
+tabelaVazia.hide();
 
 var tbody = $("#tbody");
 
@@ -172,15 +176,38 @@ function gerarGrafico(){
 
 
 $("#gerarTabela").click(function(){
-    gerarTable();
-    limpar();
+    var valorX = $("#valorX").val();
+    var valorY = $("#valorY").val();
+    if ((valorX != 0 || valorX != "") || (valorY != 0 || valorY != "")){
+        gerarTable();
+        limpar();
+    } else {
+        campoVazio.show()
+    }
 })
 
 $("#calcGerar").click(function(){
-    calcularResultado();
-    totalTabela();
-    gerarGrafico();
-    var mensagem = $("#mensagemTabela");
-    mensagem.show();
-        
+    tabelaVazia.hide();
+    mensagemTabela.hide();
+    if (valores.valoresX.length != 0){
+        calcularResultado();
+        totalTabela();
+        gerarGrafico();
+        mensagemTabela.show();
+    } else {
+        tabelaVazia.show();
+    }
+})
+
+$("#closeDados").click(function(){
+    mensagemDados.hide();
+})
+$("#closeTabela").click(function(){
+    mensagemTabela.hide();
+})
+$("#closeVazio").click(function(){
+    campoVazio.hide();
+})
+$("#closeVazia").click(function(){
+    tabelaVazia.hide();
 })
