@@ -7,11 +7,8 @@ $("#modaCzuber").hide();
 $("#modaConvencional").hide();
 $("#media").hide();
 $("#desvio").hide();
-$("#moda").hide();
-$("#coeficiente").hide();
 $("#modaValores").hide();
 $("#coeficienteValores").hide();
-$("#valoresDiscreta").hide();
 
 $("#convencional").click(function(){
     $("#modaDrop").addClass("active");
@@ -111,9 +108,7 @@ $("#moda").click(function(){
     $("#modaCzuber").hide();
     $("#modaConvencional").hide();
     $("#media").hide();
-    $("#desvio").show();
-    $("#moda").hide();
-    $("#coeficiente").hide();
+    $("#desvio").hide();
     $("#modaValores").show();
     $("#coeficienteValores").hide();
 })
@@ -126,9 +121,7 @@ $("#coeficiente").click(function(){
     $("#modaCzuber").hide();
     $("#modaConvencional").hide();
     $("#media").hide();
-    $("#desvio").show();
-    $("#moda").hide();
-    $("#coeficiente").hide();
+    $("#desvio").hide();
     $("#modaValores").hide();
     $("#coeficienteValores").show();
 })
@@ -256,8 +249,8 @@ $("#gerQuant").click(function(){
 // Calcula Media, Moda, Mediana, Coeficiente de Variação e Desvio Padrão
 // Motra a tabela e o grafico
 function calculoDiscreta(){
-
-    $("#valoresContinua").hide();
+    $("#menuContinua").hide();
+    $("#menuDiscreta").show();
     $("#discreta").show();
     $("#modaValores").show();
     // Exibe os titulos dos dados de Media e etc
@@ -567,9 +560,8 @@ function calculoDiscreta(){
 // Calcula Media, Moda (Convencional, King, Czuber, Pearson), Mediana, Coeficiente de Variação e Desvio Padrão
 // Mostra tabela e grafico
 function calculoContinua(){
-    
-    $("#valoresContinua").show();
-    $("#valoresDiscreta").hide();
+    $("#menuContinua").show();
+    $("#menuDiscreta").hide();
     // Exibe a moda convencional como aba padrão
     $("#modaConvencional").show();
     // Exibe os titulos dos dados de Media, Moda...
