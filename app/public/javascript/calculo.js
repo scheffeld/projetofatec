@@ -872,7 +872,7 @@ function calculoContinua(){
         });
     });
 };
-/* Fim da função gerarElementos */
+// Fim da função gerarElementos
 
 $("#comparacao").change(function(){
     var valor = $("#comparacao").val();
