@@ -7,6 +7,10 @@ $("#modaCzuber").hide();
 $("#modaConvencional").hide();
 $("#media").hide();
 $("#desvio").hide();
+$("#moda").hide();
+$("#coeficiente").hide();
+$("#modaValores").hide();
+$("#coeficienteValores").hide();
 
 $("#convencional").click(function(){
     $("#modaDrop").addClass("active");
@@ -17,6 +21,10 @@ $("#convencional").click(function(){
     $("#modaCzuber").hide();
     $("#media").hide();
     $("#desvio").hide();
+    $("#moda").hide();
+    $("#coeficiente").hide();
+    $("#modaValores").hide();
+    $("#coeficienteValores").hide();
 })
 
 $("#king").click(function(){
@@ -28,6 +36,10 @@ $("#king").click(function(){
     $("#modaConvencional").hide();
     $("#media").hide();
     $("#desvio").hide();
+    $("#moda").hide();
+    $("#coeficiente").hide();
+    $("#modaValores").hide();
+    $("#coeficienteValores").hide();
 })
 
 $("#pearson").click(function(){
@@ -39,6 +51,10 @@ $("#pearson").click(function(){
     $("#modaConvencional").hide();
     $("#media").hide();
     $("#desvio").hide();
+    $("#moda").hide();
+    $("#coeficiente").hide();
+    $("#modaValores").hide();
+    $("#coeficienteValores").hide();
 })
 
 $("#czuber").click(function(){
@@ -50,6 +66,10 @@ $("#czuber").click(function(){
     $("#modaConvencional").hide();
     $("#media").hide();
     $("#desvio").hide();
+    $("#moda").hide();
+    $("#coeficiente").hide();
+    $("#modaValores").hide();
+    $("#coeficienteValores").hide();
 })
 
 $("#mediana").click(function(){
@@ -61,6 +81,10 @@ $("#mediana").click(function(){
     $("#modaConvencional").hide();
     $("#media").show();
     $("#desvio").hide();
+    $("#moda").hide();
+    $("#coeficiente").hide();
+    $("#modaValores").hide();
+    $("#coeficienteValores").hide();
 })
 
 $("#padrao").click(function(){
@@ -72,6 +96,40 @@ $("#padrao").click(function(){
     $("#modaConvencional").hide();
     $("#media").hide();
     $("#desvio").show();
+    $("#moda").hide();
+    $("#coeficiente").hide();
+    $("#modaValores").hide();
+    $("#coeficienteValores").hide();
+})
+
+$("#moda").click(function(){    
+    $("#moda").addClass("active");
+    $("#coeficiente").removeClass("active");
+    $("#modaKing").hide();
+    $("#modaPearson").hide();
+    $("#modaCzuber").hide();
+    $("#modaConvencional").hide();
+    $("#media").hide();
+    $("#desvio").show();
+    $("#moda").hide();
+    $("#coeficiente").hide();
+    $("#modaValores").show();
+    $("#coeficienteValores").hide();
+})
+
+$("#coeficiente").click(function(){    
+    $("#moda").removeClass("active");
+    $("#coeficiente").addClass("active");
+    $("#modaKing").hide();
+    $("#modaPearson").hide();
+    $("#modaCzuber").hide();
+    $("#modaConvencional").hide();
+    $("#media").hide();
+    $("#desvio").show();
+    $("#moda").hide();
+    $("#coeficiente").hide();
+    $("#modaValores").hide();
+    $("#coeficienteValores").show();
 })
 
 
@@ -197,7 +255,11 @@ $("#gerQuant").click(function(){
 // Calcula Media, Moda, Mediana, Coeficiente de Variação e Desvio Padrão
 // Motra a tabela e o grafico
 function calculoDiscreta(){
-
+    //
+    $("#valoresContinua").hide();
+    $("#valoresDiscreta").show();
+    //
+    $("#modaValores").show();
     // Exibe os titulos dos dados de Media e etc
     $("#titulo").show();
     // Exibe os campos que serão mostrados Media, Moda e Mediana
@@ -519,6 +581,9 @@ function calculoDiscreta(){
 // Calcula Media, Moda (Convencional, King, Czuber, Pearson), Mediana, Coeficiente de Variação e Desvio Padrão
 // Mostra tabela e grafico
 function calculoContinua(){
+    
+    $("#valoresContinua").show();
+    $("#valoresDiscreta").hide();
     // Exibe a moda convencional como aba padrão
     $("#modaConvencional").show();
     // Exibe os titulos dos dados de Media, Moda...
