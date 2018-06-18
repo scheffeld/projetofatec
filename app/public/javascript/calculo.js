@@ -11,6 +11,7 @@ $("#moda").hide();
 $("#coeficiente").hide();
 $("#modaValores").hide();
 $("#coeficienteValores").hide();
+$("#valoresDiscreta").hide();
 
 $("#convencional").click(function(){
     $("#modaDrop").addClass("active");
@@ -255,10 +256,9 @@ $("#gerQuant").click(function(){
 // Calcula Media, Moda, Mediana, Coeficiente de Variação e Desvio Padrão
 // Motra a tabela e o grafico
 function calculoDiscreta(){
-    //
+
     $("#valoresContinua").hide();
-    $("#valoresDiscreta").show();
-    //
+    $("#discreta").show();
     $("#modaValores").show();
     // Exibe os titulos dos dados de Media e etc
     $("#titulo").show();
@@ -420,21 +420,7 @@ function calculoDiscreta(){
     // Calculo da Mediana
     // Mediana é o elemento central quando a quantidade de elementos é inpar
     // Mediana é a soma dos 2 elementos centrais dividido por 2 quando é par
-    // Verifica se a quantidade de elementos é par, dividindo por 2
-    if (qtd%2 == 0){
-        // Se for par, variavel recebe o indicie do primeiro valor central
-        var d = qtd/2;
-        // Variavel recebe os valores centrais divididos por 2
-        mediana = (elementos[d] + elementos[d-1])/2;
-    // Caso o número seja impar
-    } else if (qtd%2 == 1){
-        // Variavel recebe a quantidade de elementos - 1
-        var d = qtd - 1
-        // Variavel recebe (quantidade de elementos - 1)/ 2, para saber qual é o indicie central
-        var e = d/2;
-        // Variavel recebe o valor da mediana, no caso, o elemento central
-        mediana = elementos[e];
-    };
+    mediana = math.median(elementos);
 
     // For para calcular o total de todos os valores (Quantidade de Elementos, Acumulado, Porcentagem, Elemento*Frequencia e Variancia)
     for (i =0; i < elementosAux.length; i++){
