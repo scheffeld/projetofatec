@@ -10,6 +10,7 @@ $("#desvio").hide();
 $("#modaValores").hide();
 $("#coeficienteValores").hide();
 $("#quatitativaMensagem").hide();
+$("#numeroElementos").empty();
 
 $("#convencional").click(function(){
     $("#modaDrop").addClass("active");
@@ -219,6 +220,8 @@ function gerarElementos(){
 
 // Função para gerar chamar outras função de Variavel Quantitativa de acordo com o tipo de dado
 $("#gerQuant").click(function(){
+    // Fechando mensagem de erro, teste para ver se apaga
+    $("#quatitativaMensagem").hide("slow");
     var dadosCopiados = $("#dadosCopiados").is(':checked')
     // Receve o valor do Select de Tipo de Dado
     var tipoDados = $("#tipoDados").val();
@@ -231,8 +234,8 @@ $("#gerQuant").click(function(){
     // Variavel que recebe o valor do campo que recebe os dados com ponto-virgula
     var dados = $("#dados").val();
     // Verifica se o campo de quantidade de elementos é 0 mesmo sem marcar o checkbox de dados copiados
-    if (numeroElementos == null || (numeroElementos == null && dadosCopiados === false) || (dados == null)){
-        $("#quatitativaMensagem").show();
+    if (numeroElementos == 0 || (numeroElementos == 0 && dadosCopiados === false) || (dados == "" && dadosCopiados === true)){
+        $("#quatitativaMensagem").show("slow")
     } else {
         // Faz o if para verificar qual dado foi selecionado
         if (tipoDados == 1){
@@ -250,14 +253,28 @@ $("#gerQuant").click(function(){
 
 });
 
+// Limpando os valores de calculo de Variavel Quantitativa Discreta para não bugar o código
+function limparDiscreta(){
+    $("#mediaDiscreta").empty();
+    $("#modaDiscreta").empty();
+    $("#medianaDiscreta").empty();
+}
+
 // Função que faz o caculo de Variavel Quantitativa Discreta
 // Calcula Media, Moda, Mediana, Coeficiente de Variação e Desvio Padrão
 // Motra a tabela e o grafico
 function calculoDiscreta(){
+
+    // Chamando a função de limpeza dos resultados de Quantitativa Discreta
+    limparDiscreta();
+    // Escondendo menu com resultado de Quantitativa Continua
     $("#menuContinua").hide();
+    // Abrindo menu com resultado de Quantitativa Discreta
     $("#menuDiscreta").show();
-    $("#discreta").show();
+    // Abrindo valores de Media, Moda e Mediana como vizualização padrão
     $("#modaValores").show();
+    // Abrindo menu com tabela de Quantitativa Discreta
+    $("#discreta").show();
     // Exibe os titulos dos dados de Media e etc
     $("#titulo").show();
     // Exibe os campos que serão mostrados Media, Moda e Mediana
@@ -437,13 +454,10 @@ function calculoDiscreta(){
     // Calculando a media aritimetica dos elementos
     mediaAr = (xi_fi_/qtdElementos_);
 
-    // Deixando a div vazia e adicionando o valor de media a div 
-    mediaDiscreta.empty();
+    // Deixando a div vazia e adicionando o valor de media a div
     mediaDiscreta.append(parseFloat(mediaAr).toFixed(2));
     // Deixando a div vazia e adicionando o valor de mediana a div
-    medianaDriscreta.empty();
     medianaDriscreta.append(parseFloat(mediana).toFixed(2));
-    modaDiscreta.empty();
 
     // If para verificar se existem mais de 1 moda
     if (moda.length > 1){
@@ -476,6 +490,8 @@ function calculoDiscreta(){
     var thead = $('<thead class="text-center" style="background-color: rgb(74, 85, 92); color: white;"><tr class="medium"><th class="text-center">Xi</th><th class="text-center">Fi</th><th class="text-center">F(Acumulado)</th><th class="text-center">F(%)</th><th class="text-center">Xi.Fi</th><th class="text-center">Variancia</th></thead>');
     // Criando o body vazio da tabela, para adicionar os valores
     var tbody = $('<tbody></tbody>');
+    // Limpando variavel dos grupos da tabela
+    tr.empty();
     
     // For para adicionar todos os valores individuais a tabela criada
     for (i = 0; i < elementosAux.length; i++){
@@ -522,7 +538,7 @@ function calculoDiscreta(){
     div.append(table);
 
     
-
+    $("#container").empty();
     // Gerando os graficos
     $(function () { 
         // Atribuindo a variavel o valores dos elementos
@@ -565,7 +581,9 @@ function calculoDiscreta(){
 // Calcula Media, Moda (Convencional, King, Czuber, Pearson), Mediana, Coeficiente de Variação e Desvio Padrão
 // Mostra tabela e grafico
 function calculoContinua(){
+    // Abrindo menu de valores de Quantitativa Continua
     $("#menuContinua").show();
+    // Escondendo menu de valores de Quantitativa Discreta
     $("#menuDiscreta").hide();
     // Exibe a moda convencional como aba padrão
     $("#modaConvencional").show();
@@ -621,19 +639,18 @@ function calculoContinua(){
     // Array que recebe os intervalos de classes para ser mostrado no grafico
     var classeGrafico = new Array();
     // Array que recebe os resultados de moda convencional
-    var resultConvencional = new Array();
-    // Array que recebe os resultados de moda king
-    var resultKing = new Array();
-    // Array que recebe os resultados de moda convencional
-    var resultPearson = new Array();
-    // Array que recebe os resultados de moda convencional
-    var resultCzuber = new Array();
     var moda = new Array();
-    var medianaContinua = $("#medianaResult")
-    var mediaContinua = $("#mediaResult")
-    var modaCzuber = new Array();
+    // Array que recebe os resultados de moda king
     var modaKing = new Array();
+    // Array que recebe os resultados de moda convencional
     var modaPearson = new Array();
+    // Array que recebe os resultados de moda convencional
+    var modaCzuber = new Array();
+    // Variavel que recebe o div de resultado de mediana
+    var medianaContinua = $("#medianaResult");
+    // Variavel que recebe o div de resultado de media
+    var mediaContinua = $("#mediaResult");
+    // Variavel que recebe o resultado da mediana
     var mediana = 0;
 
     // If que verifica se o usuário optou por inserir todos os dados manualmente ou colou de um banco
@@ -646,6 +663,7 @@ function calculoContinua(){
             // Array que recebe o valor do input atual
             elementos.push(valor);
         };
+    // Se a opção de dados copiados estiver marcada, prossegue nesses comandos
     } else if (dadosCopiados == true){        
         // Array recebe todos os dados, utilizando ponto e virgula como seoaração
         var elementos = dados.split(";");
@@ -697,12 +715,19 @@ function calculoContinua(){
 
     // While para calcular o intervalo de classe
     while (!achou){
+        // Amplitude recebe o incremento
         amplitude++;
+        // For para calcular a amplitude
         for (i = -1; i < 2; i++){
+            // If que verifica cada valor de amplitude
             if ((amplitude % (raiz + i)) === 0){
+                // Variavel que recebe true caso o if seja verdadeiro
                 achou = true;
+                // Variavel classes recebe o valor de i + raiz, calculada anteriormente
                 classes = (i + raiz);
+                // Intervalo de classe é o calculo da amplitude dividido pelas classes
                 intervaloClasse = (amplitude/classes);
+                // Comando para parar o for
                 break;
             };
         };
@@ -727,72 +752,92 @@ function calculoContinua(){
         qtdIntervalos.push(cont);
     };
 
-
+    // For para calcular o acumulado de frequencia das classes e porcentagens
     for (i = 0; i < qtdIntervalos.length; i++){
+        // Variavel que recebe a porcentagem atual do index
         var valor = ((qtdIntervalos[i]/qtd)*100);
+        // Array recebe a porcentagem atual
         qtdPorc.push(valor);
+        // If para verificar se é o primeiro indicie, caso for não existe acumulado ainda
         if (i === 0){
+            // Quando o index é 0, o acumulado é o valor do indicie 0
             acumulado.push(qtdIntervalos[i]);
-        } else {
-            acumulado.push((acumulado[i-1] + qtdIntervalos[i]));
-        };
-    };
-
-
-    for (i = 0; i < qtdPorc.length; i++){
-        if (i === 0){
+            // Acumulado de porcentagem
             acumuladoPorc.push(qtdPorc[i]);
         } else {
+            // Array recebendo o acumulado, valor anterior + atual
+            acumulado.push((acumulado[i-1] + qtdIntervalos[i]));
+            // Acumulado de porcentagem
             acumuladoPorc.push((acumuladoPorc[i-1] + qtdPorc[i]));
         };
     };
 
+    // Variavel que recebe o maior dos elementos, para calculo de moda convencional
     var maior = Math.max.apply(Math, qtdIntervalos);
 
+    // Variavel que recebe o total dos elementos
     var elementosAux_ = 0
+    // Variavel que recebe o total de frequencia dos elementos
     var qtdAux_ = 0
 
-    for (i = 0; i < qtd.length; i++){
+    // For para calcular o total de elementos e suas frequencias
+    for (i = 0; i < elementosAux.length; i++){
         elementosAux_ = elementosAux[i]*qtdAux[i];
         qtdAux_ = qtdAux_ + qtdAux[i];
     }
 
-    for (i = 0; i < elementosAux.length; i++){
-        elementosAux_ += elementosAux[i]*qtdAux[i]
-    }
-
+    // Variavel que recebe a mediana, usando a biblioteca externa math (math. = Externa, Math. = Interna)
     mediana = math.median(elementos)
-
+    // Variavel que recebe a média ponderada
     media = (elementosAux_ / qtd);
     
+    // For para adicionar os valores das modas (Convencional, Czuber, King, Pearson)
     for (i = 0; i < qtdIntervalos.length; i++){
         if (qtdIntervalos[i] == maior){
+            // Convencional recebe a classe
             moda.push(i+1);
+            // Convencional recebe a frequencia
             moda.push(qtdIntervalos[i]);
+            // Convencional recebe o ponto médio
             moda.push((menorIntervalo[i])+((intervaloClasse/2)));
+            // Czuber recebe a classe
             modaCzuber.push(i+1);
+            // Czuber recebe a frequencia
             modaCzuber.push(qtdIntervalos[i]);
-            modaCzuber.push((menorIntervalo[i])+(((qtdIntervalos[i] - qtdIntervalos[i-1]))/((qtdIntervalos[i]-qtdIntervalos[i-1])+(qtdIntervalos[i] - qtdIntervalos[i+1])))*intervaloClasse);
+            // Czuber recebe o ponto médio
+            modaCzuber.push((menorIntervalo[i])+(((qtdIntervalos[i] - qtdIntervalos[i-1]))/((qtdIntervalos[i]-qtdIntervalos[i-1])+(qtdIntervalos[i] - qtdIntervalos[i+1])));*intervaloClasse);
+            // King recebe a classe
             modaKing.push(i+1);
+            // King recebe a frequencia
             modaKing.push(qtdIntervalos[i]);
-            modaKing.push((menorIntervalo[i])+((qtdIntervalos[i + 1])/(qtdIntervalos[i+1] + qtdIntervalos[i-1]))*intervaloClasse)
+            // King recebe o ponto médio
+            modaKing.push((menorIntervalo[i])+((qtdIntervalos[i + 1])/(qtdIntervalos[i+1] + qtdIntervalos[i-1]))*intervaloClasse);
+            // Pearson recebe a classe
             modaPearson.push(i+1);
+            // Pearson recebe a frequencia
             modaPearson.push(qtdIntervalos[i]);
+            // Pearson recebe o ponto médio
             modaPearson.push((3*mediana)-(2*media));
         }
     }
 
-    mediaContinua.append(media)
+    // Mostrando media para usuario
+    mediaContinua.append(media);
+    // Mostrando mediana para usuario
     medianaContinua.append(mediana);
-    $("#convencionalClasse").append(moda[0])
-    $("#convencionalFrequencia").append(moda[1])
-    $("#convencionalPonto").append(moda[2])
-    $("#czuberClasse").append(modaCzuber[0])
-    $("#czuberFrequencia").append(modaCzuber[1])
-    $("#czuberPonto").append(modaCzuber[2])
-    $("#kingClasse").append(modaKing[0])
-    $("#kingFrequencia").append(modaKing[1])
+    // Mostrando moda convecional para usuario
+    $("#convencionalClasse").append(moda[0]);
+    $("#convencionalFrequencia").append(moda[1]);
+    $("#convencionalPonto").append(moda[2]);
+    // Mostrando moda czuber para usuario
+    $("#czuberClasse").append(modaCzuber[0]);
+    $("#czuberFrequencia").append(modaCzuber[1]);
+    $("#czuberPonto").append(modaCzuber[2]);
+    // Mostrando moda king para usuario
+    $("#kingClasse").append(modaKing[0]);
+    $("#kingFrequencia").append(modaKing[1]);
     $("#kingPonto").append(modaKing[2]);
+    // Mostrando moda pearson para usuario
     $("#pearsonClasse").append(modaPearson[0]);
     $("#pearsonFrequencia").append(modaPearson[1]);
     $("#pearsonPonto").append(parseFloat(modaPearson[2]).toFixed(2));
@@ -810,30 +855,42 @@ function calculoContinua(){
     var tbody = $('<tbody></tbody>');
     
     
-
+    // For para adicionar todos os valores às colunas, e as colunas nas linhas
     for (i =0; i < classes; i++){
+        // Variavel que recebe o elemento de coluna no HTML
         var tr = $('<tr class="light"></tr>');
+        // Inserindo a classe
         tr.append('<td>' + (i + 1) + '</td>');
+        // Inserindo o intervalo, ponto minimo e maximo
         tr.append('<td>' + menorIntervalo[i] + ' |---- ' + maiorIntervalo[i] + '</td>');
+        // Inserindo frequencia do intervalo
         tr.append('<td>' + qtdIntervalos[i] + '</td>');
+        // Inserindo porcentagem do intervalo
         tr.append('<td>' + parseFloat(qtdPorc[i].toFixed(2)) + '%' + '</td>');
+        // Inserindo acumulado de frequencia do intervalo
         tr.append('<td>' + acumulado[i] + '</td>');
+        // Inserindo acumulado de porcentagem do intervalo
         tr.append('<td>' + parseFloat(acumuladoPorc[i].toFixed(2)) + '%' + '</td>');
+        // Inserindo valor ainda não especificado
         tr.append('<td>' + valorUndefinido[i] + '</td>');
+        // Inserindo tudo isso ao body da tabela
         tbody.append(tr);
     }
     
+    // Adicionando o head na tabela
     table.append(thead);
+    // adicionando o body na tabela
     table.append(tbody);
+    // adicionando a tabela no espaço
     div.append(table);
 
-
+    // Array recebendo os intervalor de classe para mostrar no gráfico
     for (i = 0; i < classes; i++){
         classeGrafico.push(menorIntervalo[i] + ' |-- ' + maiorIntervalo[i]);
     }
 
 
-
+    // Grafico
     $(function () { 
         a = classeGrafico;
         b = qtdIntervalos;
