@@ -805,7 +805,7 @@ function calculoContinua(){
             // Czuber recebe a frequencia
             modaCzuber.push(qtdIntervalos[i]);
             // Czuber recebe o ponto médio
-            modaCzuber.push((menorIntervalo[i])+(((qtdIntervalos[i] - qtdIntervalos[i-1]))/((qtdIntervalos[i]-qtdIntervalos[i-1])+(qtdIntervalos[i] - qtdIntervalos[i+1])));*intervaloClasse);
+            modaCzuber.push((menorIntervalo[i])+(((qtdIntervalos[i] - qtdIntervalos[i-1]))/((qtdIntervalos[i]-qtdIntervalos[i-1])+(qtdIntervalos[i] - qtdIntervalos[i+1])))*intervaloClasse);
             // King recebe a classe
             modaKing.push(i+1);
             // King recebe a frequencia
@@ -1208,7 +1208,18 @@ function gerarBinomial(){
     }
 };
 
+// Funcao para gerar Distribuição Binomial
 $("#gerarBinomial").click(function(){
+    // Variavel que recebe o valor do campo N para verificar se não esta vazio
+    $("#valorN").val()
+    // Variavel que recebe o valor do campo P para verificar se não esta vazio
+    $("#valorP").val()
+    // Variavel que recebe o valor do campo Q para verificar se não esta vazio
+    $("#valorQ").val()
+    // Variavel que recebe a comparaç
+    var choice = $("#compBinomial").val();
+
+
     $("#resultadoBinomial").empty();
     gerarBinomial();
 });
