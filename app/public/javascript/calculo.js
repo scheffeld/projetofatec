@@ -9,6 +9,7 @@ $("#media").hide();
 $("#desvio").hide();
 $("#modaValores").hide();
 $("#coeficienteValores").hide();
+$("#quatitativaMensagem").hide();
 
 $("#convencional").click(function(){
     $("#modaDrop").addClass("active");
@@ -225,8 +226,14 @@ $("#gerQuant").click(function(){
     var tipoColeta = $("#tipoColeta").val();
     // Recupera a div que contem os input que foram recebidos   
     var calculos = $("#calculos");
+    // Variavel que recebe o número de elementos inseridos
+    var numeroElementos = $("#numeroElementos").val();
+    // Variavel que recebe o valor do campo que recebe os dados com ponto-virgula
+    var dados = $("#dados").val();
     // Verifica se o campo de quantidade de elementos é 0 mesmo sem marcar o checkbox de dados copiados
-    if ($("#numeroElementos").val() > 0  || dadosCopiados === true){
+    if (numeroElementos == null || (numeroElementos == null && dadosCopiados === false) || (dados == null)){
+        $("#quatitativaMensagem").show();
+    } else {
         // Faz o if para verificar qual dado foi selecionado
         if (tipoDados == 1){
             // Se o usuario selecionou o tipo 1 "Discreta", chama a função que calcula a Variavel Quantitativa Discreta
@@ -239,8 +246,6 @@ $("#gerQuant").click(function(){
             // Fecha o modal para visualização dos dados gerados
             $("#varQuant").modal("hide");
         }
-    } else {
-        alert('Campos Vazios')
     }
 
 });
