@@ -11,6 +11,7 @@ $("#modaValores").hide();
 $("#coeficienteValores").hide();
 $("#quatitativaMensagem").hide();
 $("#numeroElementos").empty();
+$("#binomialMensagem").hide();
 
 $("#convencional").click(function(){
     $("#modaDrop").addClass("active");
@@ -1210,6 +1211,8 @@ function gerarBinomial(){
 
 // Funcao para gerar Distribuição Binomial
 $("#gerarBinomial").click(function(){
+    
+    $("#binomialMensagem").hide();
     // Variavel que recebe o valor do campo N para verificar se não esta vazio
     $("#valorN").val()
     // Variavel que recebe o valor do campo P para verificar se não esta vazio
@@ -1219,9 +1222,55 @@ $("#gerarBinomial").click(function(){
     // Variavel que recebe a comparaç
     var choice = $("#compBinomial").val();
 
+    // If para verificar qual o tipo de comparação para verificar os vampos vazios
+    if (choice == 1){
+        var binExatamente = $("#binExatamente").val();
 
-    $("#resultadoBinomial").empty();
-    gerarBinomial();
+        if (binExatamente == "" || binExatamente == null){
+            $("#binomialMensagem").show();
+        } else {
+            
+            $("#resultadoBinomial").empty();
+            gerarBinomial();
+        }
+
+    } else if (choice == 2){
+        var binMenor = $("#binMenor").val();
+
+        if (binMenor == "" || binMenor == null){
+            $("#binomialMensagem").show();
+        } else {
+            
+            $("#resultadoBinomial").empty();
+            gerarBinomial();
+        }
+
+    } else if (choice == 3){
+        var binMaior = $("#binMaior").val();
+
+        if (binMaior == "" || binMaior == null){
+            $("#binomialMensagem").show();
+        } else {
+            
+            $("#resultadoBinomial").empty();
+            gerarBinomial();
+        }
+
+    } else if (choice == 4){
+        var binEntreOne = $("#binEntreOne").val();
+        var binEntreTwo = $("#binEntreTwo").val();
+
+        if ((binEntreOne == "" || binEntreOne == null) || (binEntreTwo == "" || binEntreTwo == null)){
+            $("#binomialMensagem").show();
+        } else {
+            
+            $("#resultadoBinomial").empty();
+            gerarBinomial();
+        }
+
+    } else if (choice < 1){
+        $("#binomialMensagem").show();
+    }
 });
 
 function calcDistrib() {
