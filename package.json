@@ -4,7 +4,7 @@
   "description": "Projeto para FATEC, para aula da Malu.",
   "main": "app.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon app.js"
   },
   "author": "Roger S., Gabriel P., Vitor R.",
   "license": "ISC",
