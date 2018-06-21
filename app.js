@@ -1,5 +1,6 @@
 var app = require('./config/server');
 
-app.listen(4000, function(){
-    console.log("Servidor ON");
+var porta = process.env.PORT || 8080;
+app.listen(porta, function(){
+    console.log("Servidor ON")
 });
