@@ -1,3 +1,4 @@
+// Oculta todos os menus e mensagens no inicio
 $("#continua").hide();
 $("#discreta").hide();
 $("#titulo").hide();
@@ -12,6 +13,10 @@ $("#coeficienteValores").hide();
 $("#quatitativaMensagem").hide();
 $("#numeroElementos").empty();
 $("#binomialMensagem").hide();
+$("#normalMensagem").hide();
+$("#compNormalMensagem").hide();
+$("#uniformeMensagem").hide();
+$("#comUniformeMensagem").hide();
 
 $("#convencional").click(function(){
     $("#modaDrop").addClass("active");
@@ -491,8 +496,6 @@ function calculoDiscreta(){
     var thead = $('<thead class="text-center" style="background-color: rgb(74, 85, 92); color: white;"><tr class="medium"><th class="text-center">Xi</th><th class="text-center">Fi</th><th class="text-center">F(Acumulado)</th><th class="text-center">F(%)</th><th class="text-center">Xi.Fi</th><th class="text-center">Variancia</th></thead>');
     // Criando o body vazio da tabela, para adicionar os valores
     var tbody = $('<tbody></tbody>');
-    // Limpando variavel dos grupos da tabela
-    tr.empty();
     
     // For para adicionar todos os valores individuais a tabela criada
     for (i = 0; i < elementosAux.length; i++){
@@ -987,6 +990,7 @@ function normalMenor(){
     var menorQ = parseFloat($("#compMenor").val());
     var media = parseFloat($("#mediaNormal").val());
     var desvio = parseFloat($("#desvioNormal").val());
+    var compResult = $("#compResult");
 
     if (menorQ < media){
         var valor = (0.5 - getValue((menorQ - media)/desvio))*100;
@@ -1036,56 +1040,71 @@ function entreNormal(){
 
 };
 
+// Mostra os campos que precisam de dados de acordo com a comparação escolhida
 $("#compBinomial").change(function(){
+    // Variavel que recebe a comparação escolhida
     var choice =  $("#compBinomial").val();
+    // Variavel que recebe o campo aonde os elementos vão ficar
+    var div = $("#elementosK");
+    // Verifica se a comparação é 1
     if(choice == 1){
-
-        var label = $('<label class="col-6 medium">K:</label>')
+        // Variavel que recebe o label do campo
+        var label = $('<label class="col-6 medium">K:</label>');
+        // Variavel que recebe o campo
         var input = $('<input id="binExatamente" class="light form-control form-control-sm input-sm col-2" type="number" min="0" max="1" step="0.1" placeholder="0"/>')
-        var div = $("#elementosK");
+        // Limpa o espaço do resultado caso o usuario tiver mudado de comapração
         div.empty();
-
+        // Insere o label no espaço
         div.append(label);
+        // Insere o campo no espaço
         div.append(input);
     
     } else if (choice == 2){
-
-        var label = $('<label class="col-6 medium">K Menor Que:</label>')
+        // Variavel que recebe o label do campo
+        var label = $('<label class="col-6 medium">K Menor Que:</label>');
+        // Variavel que recebe o campo
         var input = $('<input id="binMenor" class="light form-control form-control-sm input-sm col-2" type="number" min="0" max="1" step="0.1" placeholder="0"/>')
-        var div = $("#elementosK");
+        // Limpa o espaço do resultado caso o usuario tiver mudado de comapração
         div.empty();
-
+        // Insere o label no espaço
         div.append(label);
+        // Insere o campo no espaço
         div.append(input);
 
 
     } else if (choice == 3){
-
+        // Variavel que recebe o label do campo
         var label = $('<label class="col-6 medium">K Maior Que:</label>')
+        // Variavel que recebe o campo
         var input = $('<input id="binMaior" class="light form-control form-control-sm input-sm col-2" type="number" min="0" max="1" step="0.1" placeholder="0"/>')
-        var div = $("#elementosK");
+        // Limpa o espaço do resultado caso o usuario tiver mudado de comapração
         div.empty();
-
+        // Insere o label no espaço
         div.append(label);
+        // Insere o campo no espaço
         div.append(input);
 
     } else if (choice == 4){
-
-        var label = $('<label class="col-6 medium">Entre</label>')
-        var input = $('<input id="binEntreOne" class="light form-control form-control-sm input-sm col-2" type="number" min="0" max="1" step="0.1" placeholder="0"/>')
-        var label_ = $('<label class="col-2 medium">E</label>')
-        var input_ = $('<input id="binEntreTwo" class="light form-control form-control-sm input-sm col-2" type="number" min="0" max="1" step="0.1" placeholder="0"/>')
-        var div = $("#elementosK");
+        // Variavel que recebe o label do campo
+        var label = $('<label class="col-6 medium">Entre</label>');
+        // Variavel que recebe o campo
+        var input = $('<input id="binEntreOne" class="light form-control form-control-sm input-sm col-2" type="number" min="0" max="1" step="0.1" placeholder="0"/>');
+        // Variavel que recebe o label do campo
+        var label_ = $('<label class="col-2 medium">E</label>');
+        // Variavel que recebe o campo
+        var input_ = $('<input id="binEntreTwo" class="light form-control form-control-sm input-sm col-2" type="number" min="0" max="1" step="0.1" placeholder="0"/>');
+        // Limpa o espaço do resultado caso o usuario tiver mudado de comapração
         div.empty();
-
+        // Insere o label no espaço
         div.append(label);
+        // Insere o campo no espaço
         div.append(input);
+        // Insere o label no espaço
         div.append(label_);
+        // Insere o campo no espaço
         div.append(input_);
 
     };
-
-    return choice;
 });
 
 function gerarBinomial(){
@@ -1390,8 +1409,62 @@ function calcDistrib() {
     }
 };
 
+// Função para gerar a Distribuição uniforme
+// Quando o botão "Gerar" desse modal é clicado, faz essas verificações e calculos
 $("#gerarNormal").click(function(){
-    calcDistrib();
+    // Variavel que recebe o valore do campo media
+    var media = $("#mediaNormal").val();
+    // Variavel que recebe o valor do campo desvio
+    var desvio = $("#desvioNormal").val();
+    // Variavel que recebe o tipo de comparação do usuario
+    var choice = $("#comparacao").val();
+    // Variavel que recebe a mensagem de erro de campo vazio
+    var normalMensagem = $("#normalMensagem");
+    // Variavel que recebe a mensagem de erro de comparação vazia
+    var compMensagem = $("#compNormalMensagem");
+
+    // If para verificar se algum dos campos esta vazio
+    if (choice == 1){
+        // Variavel que recebe o valor do campo maior
+        var maior = $("#compMaior").val();
+        // Caso a variavel esteja vazia, retorna a mensagem de erro
+        if ((maior == null || maior == "") || (media == null || media == "") || (desvio == "" || desvio == null)){
+            // Mostra a mensagem de erro de campo vazio
+            normalMensagem.show();
+        } else {
+            // Executa os calculos necessário
+            calcDistrib();
+        }
+
+    } else if (choice == 2){
+        // Variavel que recebe o valor do campo menor
+        var menor = $("#compMenor").val();
+        // Caso a variavel esteja vazia, retorna a mensagem de erro
+        if ((menor == null || menor == 0) || (media == null || media == "") || (desvio == "" || desvio == null)){
+            // Mostra a mensagem de erro de campo vazio
+            normalMensagem.show();
+        } else {
+            // Executa os calculos necessário
+            calcDistrib();
+        }
+
+    } else if (choice == 3){
+        // Variavel que recebe o menor ponto de comparacao
+        var menor = $("#entreOne").val();
+        // Variavel que recebe o maior ponto d ecomparação
+        var maior = $("#entreTwo").val();
+        // Caso a variavel esteja vazia, retorna a mensagem de erro
+        if ((menor == null || menor == "") || (maior == null || maior == "") || (media == null || media == "") || (desvio == "" || desvio == null)){
+            // Mostra a mensagem de erro de campo vazio
+            normalMensagem.show();
+        } else {
+            // Executa os calculos necessário
+            calcDistrib();
+        }
+    } else {
+        // Mostra a mensagem de erro caso não selecione a comparação
+        compMensagem.show();
+    }
 });
 
 $("#calcUniforme").change(function(){
@@ -1588,24 +1661,58 @@ $("#gerarUniforme").click(function(){
     
     // Atribui a choice, a escolha do tipo de Distribuição Uniforme
     var choice = $("#calcUniforme").val()
-
+    // Variavel que recebe a mensagem de erro
+    var mensagemValor = $("#uniformeMensagem")
+    // Variavel que recebe a mensagem de erro
+    var mensagemComp = $("#comUniformeMensagem")
     //IF para verificar qual opção foi escolhida e executar as devidas ações
     if (choice == 1){
-
-        // Caso a opção seja Maior, executa a função abaixo
-        maiorUniforme();
+        // Varival que recebe o valor de ponto minimo
+        var pontoMinimo = $("#pontoMinimo").val();
+        // Variavel que recebe o valor de ponto maximo
+        var pontoMaximo = $("#pontoMaximo").val();
+        // Variavel que recebe o valor de maior
+        var maior = $("#maior").val();
+        if ((pontoMinimo == null || pontoMinimo == "") || (pontoMaximo == null || pontoMaximo == "") || (maior == null || maior == "")){
+            mensagemValor.show();
+        } else {
+            // Caso a opção seja Entre, executa a função abaixo
+            maiorUniforme();
+        }
 
     } else if (choice == 2){
-
-        // Caso a opção seja Menor, executa a função abaixo
-        menorUniforme();
+        // Varival que recebe o valor de ponto minimo
+        var pontoMinimo = $("#pontoMinimo").val();
+        // Variavel que recebe o valor de ponto maximo
+        var pontoMaximo = $("#pontoMaximo").val();
+        // Variavel que recebe o valor de maior
+        var menor = $("#menor").val();
+        if ((pontoMinimo == null || pontoMinimo == "") || (pontoMaximo == null || pontoMaximo == "") || (menor == null || menor == "")){
+            mensagemValor.show();
+        } else {
+            // Caso a opção seja Entre, executa a função abaixo
+            menorUniforme();
+        }
 
     } else if (choice == 3){
-
-        // Caso a opção seja Entre, executa a função abaixo
-        entreUniforme();
-
+        // Varival que recebe o valor de ponto minimo
+        var pontoMinimo = $("#pontoMinimo").val();
+        // Variavel que recebe o valor de ponto maximo
+        var pontoMaximo = $("#pontoMaximo").val();
+        // Variavel que recebe o valor de ponto minimo de comparação
+        var entreOne = $("#entreOne").val();
+        // Variavel que recebe o valor de ponto maximo de comparação
+        var entreTwo = $("#entreTwo").val();
+        if ((pontoMinimo == null || pontoMinimo == "") || (pontoMaximo == null || pontoMaximo == "") || (entreOne == null || entreOne == "") || (entreTwo == null || entreTwo == "")){
+            mensagemValor.show();
+        } else {
+            // Caso a opção seja Entre, executa a função abaixo
+            entreUniforme();
+        }
+    } else {
+        mensagemComp.show();
     }
-
 })
+
+    
 // -- Fim da ação de Click do botão Gerar de Distribuição Uniforme

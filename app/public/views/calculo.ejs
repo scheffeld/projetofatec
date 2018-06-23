@@ -48,7 +48,7 @@
     <!-- Fim do grupo de botões -->
 
     <!-- Jumbotron com os resultados dos cálculos do 1º botão -->
-    <div class="card my-card" style="margin: 10px; padding-top: 13px; padding-bottom: 13px;" id="titulo">
+    <div class="card my-card" style="margin: 10px; padding-top: 13px; padding-bottom: 13px; display: none;" id="titulo">
         <div class="col-12">
             <ul class="nav nav-tabs" id="menuContinua">
                 <li class="nav-item dropdown">
@@ -68,7 +68,7 @@
                     </div>
                 </li>
             </ul>
-            <div class="card" id="modaConvencional" style="border-top: none; border-top-left-radius: 0px; border-top-right-radius: 0px; padding-top: 5px;">
+            <div class="card" id="modaConvencional" style="display: none;display: none;border-top: none; border-top-left-radius: 0px; border-top-right-radius: 0px; padding-top: 5px;">
                 <a class="light">Convencional</a>
                 <br>
                 <div class="form-group form-inline">
@@ -92,7 +92,7 @@
                     <a class="light col-2" id="kingPonto"></a>
                 </div>
             </div>
-            <div class="card" id="modaPearson" style="border-top: none; border-top-left-radius: 0px; border-top-right-radius: 0px; padding-top: 5px;">
+            <div class="card" id="modaPearson" style="display: none;border-top: none; border-top-left-radius: 0px; border-top-right-radius: 0px; padding-top: 5px;">
                 <a class="light">Pearson</a>
                 <br>
                 <div class="form-group form-inline">
@@ -104,7 +104,7 @@
                     <a class="light col-2" id="pearsonPonto"></a>
                 </div>
             </div>
-            <div class="card" id="modaCzuber" style="border-top: none; border-top-left-radius: 0px; border-top-right-radius: 0px; padding-top: 5px;">
+            <div class="card" id="modaCzuber" style="display: none;border-top: none; border-top-left-radius: 0px; border-top-right-radius: 0px; padding-top: 5px;">
                 <a class="light">Czuber</a>
                 <br>
                 <div class="form-group form-inline">
@@ -116,7 +116,7 @@
                     <a class="light col-2" id="czuberPonto"></a>
                 </div>
             </div>
-            <div class="card" id="media" style="border-top: none; border-top-left-radius: 0px; border-top-right-radius: 0px; padding-top: 5px;">
+            <div class="card" id="media" style="display: none;border-top: none; border-top-left-radius: 0px; border-top-right-radius: 0px; padding-top: 5px;">
                 <br>
                 <div class="form-group form-inline">
                     <label class="medium col-2">Media: </label>
@@ -127,7 +127,7 @@
                     <a class="light col-2" id="varianciaResult"></a>
                 </div>
             </div>
-            <div class="card" id="desvio" style="border-top: none; border-top-left-radius: 0px; border-top-right-radius: 0px; padding-top: 5px;">
+            <div class="card" id="desvio" style="display: none;border-top: none; border-top-left-radius: 0px; border-top-right-radius: 0px; padding-top: 5px;">
                 <br>
                 <div class="form-group form-inline">
                     <label class="medium col-3">Desvio Padrão: </label>
@@ -144,7 +144,7 @@
                     <a class="nav-link" id="coeficiente">Desvio e Coeficiente</a>
                 </li>
             </ul>            
-            <div class="card" id="modaValores" style="border-top: none; border-top-left-radius: 0px; border-top-right-radius: 0px; padding-top: 5px;">
+            <div class="card" id="modaValores" style="display: none; border-top: none; border-top-left-radius: 0px; border-top-right-radius: 0px; padding-top: 5px;">
                 <div class="form-group form-inline">
                     <label class="medium col-2">Media: </label>
                     <a class="light col-2" id="mediaDiscreta"></a>
@@ -154,7 +154,7 @@
                     <a class="light col-2" id="medianaDiscreta"></a>
                 </div>
             </div>           
-            <div class="card" id="coeficienteValores" style="border-top: none; border-top-left-radius: 0px; border-top-right-radius: 0px; padding-top: 5px;">
+            <div class="card" id="coeficienteValores" style="display: none; border-top: none; border-top-left-radius: 0px; border-top-right-radius: 0px; padding-top: 5px;">
                 <div class="form-group form-inline">
                     <label class="medium col-3">Desvio Padrao: </label>
                     <a class="light col-3" id="mediaDiscreta"></a>
@@ -216,14 +216,13 @@
                         <div class="col-2"></div>
                     </div>
                 </div>
-                <div class="alert alert-danger fade show alert-dimissible col-12" id="quatitativaMensagem" role="alert">
+                <div class="alert alert-danger fade show alert-dimissible col-12" id="quatitativaMensagem" role="alert" style="display: none;">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true"></span>&times;</span>
                     </button>
                     <strong>Alerta!</strong> Não foram inseridos valores para calculo.
                 </div>
-                <div class="modal-footer">
-                                   
+                <div class="modal-footer">              
                     <button type="button" class="btn btn-secondary medium" data-dismiss="modal">Fechar</button>
                     <button id="gerQuant" type="button" class="btn btn-primary medium" style="background-color: rgb(148, 22, 17); border-color: rgb(148, 22, 17);">Gerar</button>
                 </div>
@@ -260,6 +259,18 @@
                             </select>
                         </div>
                         <div id="tipoComp" class="form-group form-inline">
+                        </div>
+                        <div class="alert alert-warning fade show alert-dimissible col-12" id="compNormalMensagem" role="alert" style="display: none;">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true"></span>&times;</span>
+                            </button>
+                            <strong>Alerta!</strong> Primeiro selecione uma comparação.
+                        </div>   
+                        <div class="alert alert-danger fade show alert-dimissible col-12" id="normalMensagem" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true"></span>&times;</span>
+                            </button>
+                            <strong>Alerta!</strong> Não foram inseridos valores para calculo.
                         </div>
                         <div id="compResult" class="jumbotron">
 
@@ -304,7 +315,7 @@
                                 <option value="4">Entre:</option>
                             </select>
                         </div>                       
-                        <div class="alert alert-danger fade show alert-dimissible col-12" id="binomialMensagem" role="alert">
+                        <div class="alert alert-danger fade show alert-dimissible col-12" id="binomialMensagem" role="alert" style="display: none;">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true"></span>&times;</span>
                             </button>
@@ -347,6 +358,18 @@
                         </div>
                         <div class="form-group form-inline col-12" id="divUniforme">
 
+                        </div>
+                        <div class="alert alert-danger fade show alert-dimissible col-12" id="uniformeMensagem" role="alert" style="display: none;">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true"></span>&times;</span>
+                            </button>
+                            <strong>Alerta!</strong> Não foram inseridos valores para calculo.
+                        </div>
+                        <div class="alert alert-warning fade show alert-dimissible col-12" id="comUniformeMensagem" role="alert" style="display: none;">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true"></span>&times;</span>
+                            </button>
+                            <strong>Alerta!</strong> Escolha uma opção de calculo.
                         </div>
                         <div class="jumbotron col-12" style="height: 223px; width: 100%;" id="jumbotronUniforme">
                             
