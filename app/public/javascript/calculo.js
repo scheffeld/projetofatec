@@ -1554,24 +1554,16 @@ function maiorUniforme(){
     var diferenca = pontoMaximo - maior
     // Variavel que recebe o título do resultado, para o usuario entender o que signifca o resultado
     var tituloProb = '<h5 class="medium" style="font-size: 14px;">A probalidade do resultado ser maior que ' + maior + ' é de:</h5>'
-    // Variavel que recebe o título do resultado, para o usuario entender o que signifca o resultado
-    var tituloMed = '<h5 class="medium" style="font-size: 14px;">A Media, Variân2cia e o Desvio Padrão são:</h5>'
     // Variavel que receve o resultado do calculo da probabilidade com base nos valores informados
     var result = parseFloat(((1/(pontoMaximo-pontoMinimo))*diferenca)*100).toFixed(2);
     // Variavel que recebe o resultado calculado e prepara para ser adicionado a div junto ao titulo
     // Esse valor é informado em porcentagem(%)
     var prob = '<a class="light">' + result +'%</a>'
-    // Variavel que recebe a media
-    var media = '<a class="light">' + (((pontoMaximo - pontoMinimo)/2)+pontoMinimo) +' </a>'
 
     // Adiciona o titulo ao div
     jumbotron.append(tituloProb);
     // Adiciona o resultado ao div
     jumbotron.append(prob);
-    // Adiciona o titulo ao div
-    jumbotron.append(tituloMed);
-    // Adiciona o resultado ao div
-    jumbotron.append(media);
 
 }
 // -- Fim da função de calcular a probabilidade de valor menor
