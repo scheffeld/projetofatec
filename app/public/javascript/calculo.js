@@ -1559,7 +1559,7 @@ function maiorUniforme(){
     // Variavel que recebe o resultado calculado e prepara para ser adicionado a div junto ao titulo
     // Esse valor é informado em porcentagem(%)
     var prob = '<a class="light">' + result +'%</a>'
-
+    jumbotron.empty();
     // Adiciona o titulo ao div
     jumbotron.append(tituloProb);
     // Adiciona o resultado ao div
@@ -1639,6 +1639,7 @@ function entreUniforme(){
     // Esse valor é informado em porcentagem(%)
     var resultado = '<a class="light">' + result +'%</a>'
 
+    jumbotron.empty();
     // Adiciona o título à div
     jumbotron.append(h5);
     // Adiciona o resultado a div
